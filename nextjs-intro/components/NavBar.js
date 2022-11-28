@@ -4,23 +4,45 @@ import { useRouter } from "next/router";
 export default function NavBar() {
   const router = useRouter();
   return (
+    // nextJS13 에서는 삼항연산자를 사용하려면 nav를 span으로 감싸줘야지 사용가능
+    // 또한 class를 디자인하고 싶을때는 jsx를 사용하지 말고 globals.css 에서 class명을 설정하여 사용할 것. jsx에서 class 명이 
+    // 인식이 안됨.
     <span>
       <nav>
-        <Link href="/" className={router.pathname === "/" ? "active" : ""}>
-          Home
-        </Link>
-        <Link
-          href="/about"
-          className={router.pathname === "/about" ? "active" : ""}
-        >
-          About
-        </Link>
+        <img src="/vercel.svg" />
+        <div>
+          <Link href="/" className={router.pathname === "/" ? "active" : ""}>
+            Home
+          </Link>
+          <Link
+            href="/about"
+            className={router.pathname === "/about" ? "active" : ""}
+          >
+            About
+          </Link>
+        </div>
         <style jsx>{`
-          a {
-            text-decoration: none;
+          nav {
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            padding-bottom: 10px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+              rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
           }
-          .active {
-            color: yellow;
+          img {
+            max-width: 100px;
+            margin-bottom: 5px;
+          }
+          nav a {
+            font-weight: 600;
+            font-size: 18px;
+          }
+          nav div {
+            display: flex;
+            gap: 10px;
           }
         `}</style>
       </nav>
